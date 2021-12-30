@@ -17,21 +17,17 @@ app.use(cors());
 app.use(express.json());
 
 io.on('connection', (socket) => {
-	socket.on('connect', (message) => {
-		connectedUsers.push(socket.handshake.query.name);
-		console.log('new user ' + socket.handshake.query.name);
-		io.emit('newUser', {
-			newUserId: socket.id,
-			newUserName: socket.handshake.query.name,
-		});
-	});
+	connectedUsers[socket.handshake.query.name] = socket.id;
+
+	io.emit('newUser', connectedUsers);
 
 	socket.on('sendMessage', (message) => {
 		io.emit('receiveMessage', message);
 	});
 
 	socket.on('disconnect', () => {
-		console.log(socket.handshake.query.name + ' disconnected');
+		delete connectedUsers[socket.handshake.query.name];
+		io.emit('userLeft', connectedUsers);
 	});
 });
 
@@ -40,5 +36,3 @@ app.use('/users', usersRouter);
 server.listen(port, () => {
 	console.log(`server running on port ${port}`);
 });
-
-module.exports = { connectedUsers };

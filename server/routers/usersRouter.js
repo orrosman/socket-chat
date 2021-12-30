@@ -7,8 +7,8 @@ router.post('/login', (req, res) => {
 	try {
 		const { name } = req.body;
 
-		if (!connectedUsers.includes(name)) {
-			connectedUsers.push(name);
+		if (!connectedUsers[name]) {
+			connectedUsers[name] = null;
 
 			res.send({ login: true });
 		} else {

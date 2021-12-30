@@ -4,12 +4,14 @@ import { io } from 'socket.io-client';
 import { Container, Row, Col } from 'react-bootstrap';
 import MessagesBoard from './MessagesBoard';
 import MessagesInput from './MessageInput';
+import UsersList from './UsersList';
 
 const ChatRoom = () => {
 	const { state } = useLocation();
 	const { name } = state;
 
 	const [messages, setMessages] = useState([]);
+	const [connectedUsers, setConnectedUsers] = useState({});
 
 	const socketRef = useRef();
 
@@ -27,8 +29,12 @@ const ChatRoom = () => {
 			setMessages((prevMessages) => [...prevMessages, message]);
 		});
 
-		socketRef.current.on('newUser', (msg) => {
-			console.log(`new user name: ${msg.newUserName}`);
+		socketRef.current.on('newUser', (users) => {
+			setConnectedUsers({ ...users });
+		});
+
+		socketRef.current.on('userLeft', (users) => {
+			setConnectedUsers({ ...users });
 		});
 	};
 	useEffect(() => {
@@ -38,7 +44,9 @@ const ChatRoom = () => {
 	return (
 		<Container fluid>
 			<Row className="p-3">
-				<Col>Connected users list here</Col>
+				<Col>
+					<UsersList users={connectedUsers} />
+				</Col>
 				<Col md={8}>
 					<MessagesBoard messages={messages} />
 					<MessagesInput socket={socketRef} name={name} />

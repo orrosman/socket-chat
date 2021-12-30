@@ -1,2 +1,2 @@
-const connectedUsers = [];
+const connectedUsers = {};
 module.exports = connectedUsers;
