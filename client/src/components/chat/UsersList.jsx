@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const MessagesBoard = (props) => {
+const UsersList = (props) => {
 	const { users } = props;
 
 	return (
@@ -17,4 +17,4 @@ const MessagesBoard = (props) => {
 		</Card>
 	);
 };
-export default MessagesBoard;
+export default UsersList;
