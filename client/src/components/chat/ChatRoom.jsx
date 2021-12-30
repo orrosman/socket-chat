@@ -1,10 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import { Container, Row, Col } from 'react-bootstrap';
+import MessagesBoard from './MessagesBoard';
+import MessagesInput from './MessageInput';
 
-const App = () => {
+const ChatRoom = () => {
 	const { state } = useLocation();
 	const { name } = state;
+
+	const [messages, setMessages] = useState([]);
+
 	const socketRef = useRef();
 
 	const handleOpenSocket = () => {
@@ -17,14 +23,28 @@ const App = () => {
 			console.log(socketRef.current.id);
 		});
 
+		socketRef.current.on('receiveMessage', (message) => {
+			setMessages((prevMessages) => [...prevMessages, message]);
+		});
+
 		socketRef.current.on('newUser', (msg) => {
 			console.log(`new user name: ${msg.newUserName}`);
 		});
 	};
 	useEffect(() => {
 		handleOpenSocket();
-	});
+	}, []);
 
-	return <div className="App text-center">{name} chat room</div>;
+	return (
+		<Container fluid>
+			<Row className="p-3">
+				<Col>Connected users list here</Col>
+				<Col md={8}>
+					<MessagesBoard messages={messages} />
+					<MessagesInput socket={socketRef} name={name} />
+				</Col>
+			</Row>
+		</Container>
+	);
 };
-export default App;
+export default ChatRoom;

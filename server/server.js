@@ -17,14 +17,21 @@ app.use(cors());
 app.use(express.json());
 
 io.on('connection', (socket) => {
-	connectedUsers.push(socket.handshake.query.name);
-	io.emit('newUser', {
-		newUserId: socket.id,
-		newUserName: socket.handshake.query.name,
+	socket.on('connect', (message) => {
+		connectedUsers.push(socket.handshake.query.name);
+		console.log('new user ' + socket.handshake.query.name);
+		io.emit('newUser', {
+			newUserId: socket.id,
+			newUserName: socket.handshake.query.name,
+		});
+	});
+
+	socket.on('sendMessage', (message) => {
+		io.emit('receiveMessage', message);
 	});
 
 	socket.on('disconnect', () => {
-		console.log('user disconnected');
+		console.log(socket.handshake.query.name + ' disconnected');
 	});
 });
 
