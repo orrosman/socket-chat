@@ -21,10 +21,6 @@ const ChatRoom = () => {
 			query: { name: name },
 		});
 
-		socketRef.current.on('connect', () => {
-			console.log(socketRef.current.id);
-		});
-
 		socketRef.current.on('receiveMessage', (message) => {
 			setMessages((prevMessages) => [...prevMessages, message]);
 		});
