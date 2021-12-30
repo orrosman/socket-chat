@@ -8,11 +8,15 @@ const MessagesBoard = (props) => {
 		<Card>
 			<Card.Body>
 				<Card.Title>Messages</Card.Title>
-				{messages.map((message, index) => (
-					<div key={index}>
-						{message.name}: {message.content}
-					</div>
-				))}
+				{messages.map((message, index) =>
+					message.name && message.content ? (
+						<div key={index}>
+							{message.name}: {message.content}
+						</div>
+					) : (
+						<div key={index}>{message}</div>
+					)
+				)}
 			</Card.Body>
 		</Card>
 	);

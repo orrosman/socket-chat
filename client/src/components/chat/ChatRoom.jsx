@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import MessagesBoard from './MessagesBoard';
 import MessagesInput from './MessageInput';
 import UsersList from './UsersList';
+import UserMessage from './UserMessage';
 
 const ChatRoom = () => {
 	const { state } = useLocation();
@@ -25,12 +26,20 @@ const ChatRoom = () => {
 			setMessages((prevMessages) => [...prevMessages, message]);
 		});
 
-		socketRef.current.on('newUser', (users) => {
+		socketRef.current.on('newUser', (users, name) => {
 			setConnectedUsers({ ...users });
+			setMessages((prevMessages) => [
+				...prevMessages,
+				<UserMessage name={name} status={'new user'} />,
+			]);
 		});
 
-		socketRef.current.on('userLeft', (users) => {
+		socketRef.current.on('userLeft', (users, name) => {
 			setConnectedUsers({ ...users });
+			setMessages((prevMessages) => [
+				...prevMessages,
+				<UserMessage name={name} status={'user left'} />,
+			]);
 		});
 	};
 	useEffect(() => {

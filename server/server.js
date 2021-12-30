@@ -19,7 +19,7 @@ app.use(express.json());
 io.on('connection', (socket) => {
 	connectedUsers[socket.handshake.query.name] = socket.id;
 
-	io.emit('newUser', connectedUsers);
+	io.emit('newUser', connectedUsers, socket.handshake.query.name);
 
 	socket.on('sendMessage', (message) => {
 		io.emit('receiveMessage', message);
@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
 
 	socket.on('disconnect', () => {
 		delete connectedUsers[socket.handshake.query.name];
-		io.emit('userLeft', connectedUsers);
+		io.emit('userLeft', connectedUsers, socket.handshake.query.name);
 	});
 });
 
