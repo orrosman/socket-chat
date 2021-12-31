@@ -6,7 +6,8 @@ const MessagesInput = (props) => {
 	const [message, setMessage] = useState('');
 	const [recipient, setRecipient] = useState('all-users');
 
-	const handleSend = () => {
+	const handleSend = (e) => {
+		e.preventDefault();
 		socket.current.emit('sendMessage', {
 			content: message,
 			name: name,
@@ -37,7 +38,7 @@ const MessagesInput = (props) => {
 					</Dropdown.Item>
 				))}
 			</DropdownButton>
-			<Form>
+			<Form onSubmit={handleSend}>
 				<Form.Group className="mb-3" controlId="message-input">
 					<Form.Control
 						type="text"

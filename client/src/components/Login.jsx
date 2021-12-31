@@ -8,7 +8,8 @@ const Login = () => {
 
 	const [name, setName] = useState('');
 
-	const handleLogin = async () => {
+	const handleLogin = async (e) => {
+		e.preventDefault();
 		const hasLoggedIn = await login(name);
 		if (hasLoggedIn) {
 			navigate('/chat', { state: { name: name } });
@@ -18,7 +19,7 @@ const Login = () => {
 	};
 	return (
 		<div className="App text-center">
-			<Form>
+			<Form onSubmit={handleLogin}>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
 					<Form.Label>Display Name:</Form.Label>
 					<Form.Control
