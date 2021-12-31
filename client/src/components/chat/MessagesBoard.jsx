@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import Message from './Message';
+
 const MessagesBoard = (props) => {
 	const { messages } = props;
 

@@ -54,7 +54,11 @@ const ChatRoom = () => {
 				</Col>
 				<Col md={8}>
 					<MessagesBoard messages={messages} />
-					<MessagesInput socket={socketRef} name={name} />
+					<MessagesInput
+						socket={socketRef}
+						name={name}
+						users={connectedUsers}
+					/>
 				</Col>
 			</Row>
 		</Container>

@@ -22,7 +22,11 @@ io.on('connection', (socket) => {
 	io.emit('newUser', connectedUsers, socket.handshake.query.name);
 
 	socket.on('sendMessage', (message) => {
-		io.emit('receiveMessage', message);
+		message.recipient === 'all-users'
+			? io.emit('receiveMessage', message)
+			: io
+					.to([message.recipient, message.sender])
+					.emit('receiveMessage', message);
 	});
 
 	socket.on('disconnect', () => {
