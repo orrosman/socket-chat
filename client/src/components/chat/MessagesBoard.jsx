@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-
+import Message from './Message';
 const MessagesBoard = (props) => {
 	const { messages } = props;
 
@@ -8,15 +8,9 @@ const MessagesBoard = (props) => {
 		<Card>
 			<Card.Body>
 				<Card.Title>Messages</Card.Title>
-				{messages.map((message, index) =>
-					message.name && message.content ? (
-						<div key={index}>
-							{message.name}: {message.content}
-						</div>
-					) : (
-						<div key={index}>{message}</div>
-					)
-				)}
+				{messages.map((message, index) => (
+					<Message key={index} message={message} />
+				))}
 			</Card.Body>
 		</Card>
 	);
