@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
+import { Container, Button, Form } from 'react-bootstrap';
 import { login } from '../utils/userUtils';
 
 const Login = () => {
@@ -18,8 +18,13 @@ const Login = () => {
 		}
 	};
 	return (
-		<div className="App text-center">
-			<Form onSubmit={handleLogin}>
+		<Container className="d-flex flex-column text-center" style={{ height: '50vh' }}>
+			<Form className="m-auto" onSubmit={handleLogin}>
+			<div className="mb-4">
+				<h5>Welcome!</h5>
+				<p>Login below by choosing your display name in the chat.</p>
+				<h6>Happy chatting!👍</h6>
+			</div>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
 					<Form.Label>Display Name:</Form.Label>
 					<Form.Control
@@ -31,7 +36,7 @@ const Login = () => {
 
 				<Button onClick={handleLogin}>login</Button>
 			</Form>
-		</div>
+		</Container>
 	);
 };
 export default Login;

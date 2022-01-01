@@ -15,7 +15,7 @@ const Footer = () => {
 			w-100
 		"
 		>
-			<div className="container p-4 pb-0">
+			<div className="container p-2 pb-0">
 				<a
 					className="btn btn-outline-light btn-floating m-1"
 					href="https://www.linkedin.com/in/orrosman/"

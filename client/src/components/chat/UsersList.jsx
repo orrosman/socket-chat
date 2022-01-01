@@ -5,9 +5,9 @@ const UsersList = (props) => {
 	const { users } = props;
 
 	return (
-		<Card>
+		<Card style={{ height: '69vh' }}>
+			<Card.Title className="mx-auto mt-2">Connected Users</Card.Title>
 			<Card.Body>
-				<Card.Title>Connected Users</Card.Title>
 				<ul>
 					{Object.entries(users).map((user, index) => (
 						<li key={index}>{user[0]}</li>

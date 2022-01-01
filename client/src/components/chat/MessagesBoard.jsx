@@ -6,9 +6,9 @@ const MessagesBoard = (props) => {
 	const { messages } = props;
 
 	return (
-		<Card>
-			<Card.Body>
-				<Card.Title>Messages</Card.Title>
+		<Card style={{ height: '55vh' }}>
+			<Card.Title className="mx-auto mt-2">Messages</Card.Title>
+			<Card.Body className="overflow-auto">
 				{messages.map((message, index) => (
 					<Message key={index} message={message} />
 				))}

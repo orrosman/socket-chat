@@ -21,11 +21,12 @@ const MessagesInput = (props) => {
 	};
 
 	return (
-		<div className="container mt-1">
+		<div className="container mt-1 ">
 			<DropdownButton
 				id="recipients-dropdown"
 				title="Choose recipient"
 				variant="warning"
+				className="mb-2"
 				onSelect={handleSelect}
 			>
 				<Dropdown.Item eventKey={'all-users'}>Everybody</Dropdown.Item>

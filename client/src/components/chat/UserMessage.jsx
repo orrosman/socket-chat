@@ -3,13 +3,10 @@ import { Badge } from 'react-bootstrap';
 
 const UserMessage = (props) => {
 	const { name, status } = props;
-	return status === 'new user' ? (
-		<Badge pill bg="info" text="dark">
-			{name} has entered the chat
-		</Badge>
-	) : (
-		<Badge pill bg="info" text="dark">
-			{name} has left the chat
+	return (
+		<Badge pill bg="info" text="dark" className="mx-auto mt-2">
+			{name}{' '}
+			{status === 'new user' ? 'has entered the chat' : 'has left the chat'}
 		</Badge>
 	);
 };
