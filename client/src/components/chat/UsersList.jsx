@@ -11,7 +11,6 @@ const UsersList = (props) => {
 				<ul>
 					{Object.entries(users).map((user, index) => (
 						<li key={index}>
-							{console.log(user[0] === name)}
 							{user[0] === name ? <strong>{user[0]} - You</strong> : user[0]}
 						</li>
 					))}
