@@ -50,7 +50,7 @@ const ChatRoom = () => {
 		<Container fluid>
 			<Row className="p-3">
 				<Col>
-					<UsersList users={connectedUsers} />
+					<UsersList users={connectedUsers} name={name} />
 				</Col>
 				<Col md={9}>
 					<MessagesBoard messages={messages} />

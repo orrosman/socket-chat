@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 const UsersList = (props) => {
-	const { users } = props;
+	const { users, name } = props;
 
 	return (
 		<Card style={{ height: '69vh' }}>
@@ -10,7 +10,10 @@ const UsersList = (props) => {
 			<Card.Body>
 				<ul>
 					{Object.entries(users).map((user, index) => (
-						<li key={index}>{user[0]}</li>
+						<li key={index}>
+							{console.log(user[0] === name)}
+							{user[0] === name ? <strong>{user[0]} - You</strong> : user[0]}
+						</li>
 					))}
 				</ul>
 			</Card.Body>
