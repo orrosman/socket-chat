@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Notyf } from 'notyf';
 
+const notyf = new Notyf({
+	duration: 4000,
+	dismissible: true,
+});
 const MessagesInput = (props) => {
 	const { socket, name, users } = props;
 	const [message, setMessage] = useState('');
@@ -8,12 +13,16 @@ const MessagesInput = (props) => {
 
 	const handleSend = (e) => {
 		e.preventDefault();
-		socket.current.emit('sendMessage', {
-			content: message,
-			name: name,
-			sender: users[name],
-			recipient: recipient,
-		});
+		if (message.trim() === '') {
+			notyf.error(`Can't send an empty message`);
+		} else {
+			socket.current.emit('sendMessage', {
+				content: message,
+				name: name,
+				sender: users[name],
+				recipient: recipient,
+			});
+		}
 	};
 
 	const handleSelect = (recipientID) => {
