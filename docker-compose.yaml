@@ -1,0 +1,15 @@
+services:
+  client:
+    build:
+      context: client
+    ports:
+      - 3000:3000
+  server:
+    container_name: server
+    restart: always
+    build:
+      context: server
+      args:
+        NODE_PORT: 8080
+    ports:
+      - 8080:8080

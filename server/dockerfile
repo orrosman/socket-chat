@@ -1,0 +1,18 @@
+# Use Node v16 as the base image
+FROM node:16
+
+# Define working directory
+WORKDIR /usr/server
+
+# Add everything in the current directory to the image, in the 'usr/server' directory
+COPY . .
+
+# Install dependencies
+RUN cd /usr/server; \
+    npm ci
+
+# Expose the server port
+EXPOSE 8080
+
+# Run the server
+CMD ["node", "/usr/server/server.js"]
